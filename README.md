@@ -1,3 +1,1 @@
-# Specs
-
-This is a directory for test plans.
+This is a practice for basic test automation using playwright.
