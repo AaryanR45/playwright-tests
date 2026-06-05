@@ -25,7 +25,7 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    viewport: { width: 1440, height: 720 },
+    viewport: { width: 1440, height: 900 },
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: "https://mahrosan.github.io",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -47,6 +47,11 @@ export default defineConfig({
     // {
     //   name: "webkit",
     //   use: { ...devices["Desktop Safari"] },
+    // },
+
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
     // },
 
     /* Test against mobile viewports. */
