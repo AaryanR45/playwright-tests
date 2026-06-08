@@ -43,6 +43,10 @@ test.describe("Module Visual Automation", () => {
       // Handle full-page or module-specific screenshot
       if (module.fullPage) {
         await page.waitForLoadState("load");
+        // Wait for page to be fully loaded and stable
+        await page.waitForLoadState("networkidle");
+        // Small delay to allow animations to complete
+        await page.waitForTimeout(500);
         await expect(page).toHaveScreenshot(`${module.name}.png`, {
           fullPage: true,
           maxDiffPixels: 100,
@@ -51,6 +55,10 @@ test.describe("Module Visual Automation", () => {
       } else {
         const targetModule = page.locator(module.selector!);
         await targetModule.waitFor({ state: "visible" });
+        // Wait for page to be fully loaded and stable
+        await page.waitForLoadState("networkidle");
+        // Small delay to allow animations to complete
+        await page.waitForTimeout(500);
         await expect(targetModule).toHaveScreenshot(`${module.name}.png`, {
           maxDiffPixels: 100,
           threshold: 0.2,

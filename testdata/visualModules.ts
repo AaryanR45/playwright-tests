@@ -33,4 +33,14 @@ export const modules: VisualModule[] = [
     selector: ".faq-module",
     url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
   },
+  {
+    name: "Hero Projects",
+    selector: ".hero-projects",
+    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+  },
+  {
+    name: "PDP-Leadspace",
+    selector: ".entry-content",
+    url: "https://dev-appian-team-a.pantheonsite.io/project-detail/",
+  },
 ];
