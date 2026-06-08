@@ -1,4 +1,17 @@
-export const modules = [
+export interface VisualModule {
+  name: string;
+  url: string;
+  selector?: string;
+  index?: number;
+  fullPage?: boolean;
+}
+
+export const modules: VisualModule[] = [
+  {
+    name: "Whatwebuild-full",
+    url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
+    fullPage: true,
+  },
   {
     name: "footer",
     selector: ".site-footer__inner",
@@ -9,15 +22,15 @@ export const modules = [
     selector: ".m-secondary-hero",
     url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
   },
-   {
+  {
     name: "Testimonialarrow",
     selector: ".m-testimonial",
     url: "https://dev-appian-team-a.pantheonsite.io/home/",
     index: 0,
   },
-   {
+  {
     name: "FAQ",
     selector: ".faq-module",
     url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
-  }
+  },
 ];

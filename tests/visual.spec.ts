@@ -31,15 +31,31 @@ test.describe("Module Visual Automation", () => {
     test(`should validate ${module.name}`, async ({ page }) => {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(module.url);
-      await page.locator("button.pds-button", { hasText: "Continue" }).click();
 
-      const targetModule = page.locator(module.selector);
-      await targetModule.waitFor({ state: "visible" });
-
-      await expect(targetModule).toHaveScreenshot(`${module.name}.png`, {
-        maxDiffPixels: 100,
-        threshold: 0.2,
+      // Click continue button if it exists
+      const continueButton = page.locator("button.pds-button", {
+        hasText: "Continue",
       });
+      if (await continueButton.isVisible()) {
+        await continueButton.click();
+      }
+
+      // Handle full-page or module-specific screenshot
+      if (module.fullPage) {
+        await page.waitForLoadState("load");
+        await expect(page).toHaveScreenshot(`${module.name}.png`, {
+          fullPage: true,
+          maxDiffPixels: 100,
+          threshold: 0.2,
+        });
+      } else {
+        const targetModule = page.locator(module.selector!);
+        await targetModule.waitFor({ state: "visible" });
+        await expect(targetModule).toHaveScreenshot(`${module.name}.png`, {
+          maxDiffPixels: 100,
+          threshold: 0.2,
+        });
+      }
     });
   });
 });
