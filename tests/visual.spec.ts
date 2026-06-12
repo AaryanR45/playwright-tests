@@ -29,7 +29,7 @@ import { modules } from "../testdata/visualModules";
 test.describe("Module Visual Automation", () => {
   modules.forEach((module) => {
     test(`should validate ${module.name}`, async ({ page }) => {
-      await page.setViewportSize({ width: 1440, height: 900 });
+      await page.setViewportSize({ width: 1440, height: 820 });
       await page.goto(module.url);
 
       // Click continue button if it exists
@@ -67,3 +67,4 @@ test.describe("Module Visual Automation", () => {
     });
   });
 });
+

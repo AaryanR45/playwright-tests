@@ -13,6 +13,11 @@ export const modules: VisualModule[] = [
     fullPage: true,
   },
   {
+    name: "404",
+    selector: ".error-404",
+    url: "https://dev-appian-team-a.pantheonsite.io/404/",
+  },
+  {
     name: "footer",
     selector: ".site-footer__inner",
     url: "https://dev-appian-team-a.pantheonsite.io/home/",

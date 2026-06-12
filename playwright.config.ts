@@ -54,7 +54,7 @@ export default defineConfig({
       use: { ...devices['Desktop Edge'], channel: 'msedge' },
     },
 
-    /* Test against mobile viewports. */  //WIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+    /* Test against mobile viewports. */  //control the viewport throught the set viewportSize method in the test file to ensure the correct viewport is used for visual testing for mobile devices.
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
