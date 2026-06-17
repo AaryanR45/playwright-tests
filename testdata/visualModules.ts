@@ -11,7 +11,7 @@ export const modules: VisualModule[] = [
     name: "Whatwebuild-full",
     url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
     fullPage: true,
-  },
+  }, 
   {
     name: "404",
     selector: ".error-404",
@@ -48,4 +48,19 @@ export const modules: VisualModule[] = [
     selector: ".entry-content",
     url: "https://dev-appian-team-a.pantheonsite.io/project-detail/",
   },
+   {
+    name: "Our story",
+    selector: ".our-story",
+    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+  },
+   {
+    name: "Two column module",
+    selector: ".m-two-column",
+    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+  },
+   {
+    name: "Home-full",
+    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+    fullPage: true,
+  }, 
 ];

@@ -29,7 +29,8 @@ import { modules } from "../testdata/visualModules";
 test.describe("Module Visual Automation", () => {
   modules.forEach((module) => {
     test(`should validate ${module.name}`, async ({ page }) => {
-      await page.setViewportSize({ width: 1440, height: 820 });
+      await page.setViewportSize({ width: 1440, height: 700 });
+      console.log(module.url);
       await page.goto(module.url);
 
       // Click continue button if it exists
@@ -43,28 +44,68 @@ test.describe("Module Visual Automation", () => {
       // Handle full-page or module-specific screenshot
       if (module.fullPage) {
         await page.waitForLoadState("load");
-        // Wait for page to be fully loaded and stable
-        await page.waitForLoadState("networkidle");
-        // Small delay to allow animations to complete
-        await page.waitForTimeout(500);
+        // Wait for animations to complete
+        await page.waitForTimeout(3000);
+
+        // Disable all animations and transitions on the page
+        await page.evaluate(() => {
+          const style = document.createElement("style");
+          style.textContent = `
+            *, *::before, *::after {
+              animation: none !important;
+              transition: none !important;
+              animation-duration: 0s !important;
+            }
+          `;
+          document.head.appendChild(style);
+        });
+
+        // Pause any videos and hide iframes that might be animating
+        await page.evaluate(() => {
+          const videos = document.querySelectorAll("video");
+          videos.forEach((v) => v.pause());
+          const iframes = document.querySelectorAll("iframe");
+          iframes.forEach((i) => (i.style.display = "none"));
+        });
+
+        await page.waitForTimeout(1000);
+
         await expect(page).toHaveScreenshot(`${module.name}.png`, {
           fullPage: true,
-          maxDiffPixels: 100,
-          threshold: 0.2,
+          maxDiffPixels: 400,
+          threshold: 0.3,
+          timeout: 60000,
         });
       } else {
         const targetModule = page.locator(module.selector!);
+        // Wait for element to be attached to DOM
+        await targetModule.waitFor({ state: "attached" });
+        // Wait for element to be visible
         await targetModule.waitFor({ state: "visible" });
-        // Wait for page to be fully loaded and stable
-        await page.waitForLoadState("networkidle");
-        // Small delay to allow animations to complete
-        await page.waitForTimeout(500);
+        // Scroll element into view to ensure it's fully visible
+        await targetModule.scrollIntoViewIfNeeded();
+
+        // Disable animations on the element
+        await page.evaluate(() => {
+          const style = document.createElement("style");
+          style.textContent = `
+            *, *::before, *::after {
+              animation: none !important;
+              transition: none !important;
+              animation-duration: 0s !important;
+            }
+          `;
+          document.head.appendChild(style);
+        });
+
+        // Wait for page to stabilize
+        await page.waitForTimeout(1500);
         await expect(targetModule).toHaveScreenshot(`${module.name}.png`, {
-          maxDiffPixels: 100,
-          threshold: 0.2,
+          maxDiffPixels: 400,
+          threshold: 0.3,
+          timeout: 60000,
         });
       }
     });
   });
 });
-

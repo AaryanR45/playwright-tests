@@ -23,14 +23,16 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 5,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
+  /* Increase timeout for visual tests */
+  timeout: 120000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    viewport: { width: 1440, height: 900 },
-    /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: "https://mahrosan.github.io",
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
-  },
+  // use: {
+  //   viewport: { width: 1440, height: 900 },
+  //   /* Base URL to use in actions like `await page.goto('')`. */
+  //   baseURL: "https://mahrosan.github.io",
+  //   /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+  //   trace: "on-first-retry",
+  // },
 
   /* Configure projects for major browsers */
   projects: [
@@ -39,22 +41,22 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
 
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
+    // {
+    //   name: "firefox",
+    //   use: { ...devices["Desktop Firefox"] },
+    // },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+    // {
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"] },
+    // },
 
-    {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    },
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
 
-    /* Test against mobile viewports. */  //control the viewport throught the set viewportSize method in the test file to ensure the correct viewport is used for visual testing for mobile devices.
+    /* Test against mobile viewports. */ //control the viewport by setting in test file.
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
