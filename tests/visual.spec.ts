@@ -24,14 +24,15 @@
 // });
 
 import { test, expect } from "@playwright/test";
-import { modules } from "../testdata/visualModules";
+import { modules, getModuleUrl } from "../testdata/visualModules";
 
 test.describe("Module Visual Automation", () => {
   modules.forEach((module) => {
     test(`should validate ${module.name}`, async ({ page }) => {
-      await page.setViewportSize({ width: 1440, height: 700 });
-      console.log(module.url);
-      await page.goto(module.url);
+      await page.setViewportSize({ width: 1440, height: 906 });
+      const moduleUrl = getModuleUrl(module);
+      console.log(moduleUrl);
+      await page.goto(moduleUrl);
 
       // Click continue button if it exists
       const continueButton = page.locator("button.pds-button", {
@@ -85,6 +86,9 @@ test.describe("Module Visual Automation", () => {
         // Scroll element into view to ensure it's fully visible
         await targetModule.scrollIntoViewIfNeeded();
 
+        // Wait for scroll to stabilize
+        await page.waitForTimeout(500);
+
         // Disable animations on the element
         await page.evaluate(() => {
           const style = document.createElement("style");
@@ -98,8 +102,16 @@ test.describe("Module Visual Automation", () => {
           document.head.appendChild(style);
         });
 
+        // Hide navbar to prevent overlap
+        await page.evaluate(() => {
+          const navbar = document.querySelector(".site-header") as HTMLElement;
+          if (navbar) {
+            navbar.style.display = "none";
+          }
+        });
+
         // Wait for page to stabilize
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(2000);
         await expect(targetModule).toHaveScreenshot(`${module.name}.png`, {
           maxDiffPixels: 400,
           threshold: 0.3,

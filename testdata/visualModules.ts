@@ -1,6 +1,8 @@
+import { pages } from "./pages";
+
 export interface VisualModule {
   name: string;
-  url: string;
+  pageKey: keyof typeof pages;
   selector?: string;
   index?: number;
   fullPage?: boolean;
@@ -8,59 +10,64 @@ export interface VisualModule {
 
 export const modules: VisualModule[] = [
   {
-    name: "Whatwebuild-full",
-    url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
+    name: "Whatwebuild-full", //907
+    pageKey: "whatWeBuild",
     fullPage: true,
-  }, 
+  },
   {
-    name: "404",
+    name: "404", //810
     selector: ".error-404",
-    url: "https://dev-appian-team-a.pantheonsite.io/404/",
+    pageKey: "notFound",
   },
   {
     name: "footer",
     selector: ".site-footer__inner",
-    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+    pageKey: "home",
   },
   {
     name: "WWB-Hero",
     selector: ".m-secondary-hero",
-    url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
+    pageKey: "whatWeBuild",
   },
   {
     name: "Testimonialarrow",
     selector: ".m-testimonial",
-    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+    pageKey: "home",
     index: 0,
   },
   {
     name: "FAQ",
     selector: ".faq-module",
-    url: "https://dev-appian-team-a.pantheonsite.io/what-we-build/",
+    pageKey: "whatWeBuild",
   },
   {
     name: "Hero Projects",
     selector: ".hero-projects",
-    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+    pageKey: "home",
   },
   {
-    name: "PDP-Leadspace",
-    selector: ".entry-content",
-    url: "https://dev-appian-team-a.pantheonsite.io/project-detail/",
+    name: "PDP-Leadspace", //906
+    selector: ".m-tertiary-hero",
+    pageKey: "projectDetail",
   },
-   {
+  {
     name: "Our story",
     selector: ".our-story",
-    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+    pageKey: "home",
   },
-   {
+  {
     name: "Two column module",
     selector: ".m-two-column",
-    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+    pageKey: "home",
   },
-   {
+  {
     name: "Home-full",
-    url: "https://dev-appian-team-a.pantheonsite.io/home/",
+    pageKey: "home",
     fullPage: true,
-  }, 
+  },
 ];
+
+// Helper function to get URL from a module
+export function getModuleUrl(module: VisualModule): string {
+  return pages[module.pageKey].url;
+}
