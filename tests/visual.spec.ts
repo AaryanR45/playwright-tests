@@ -29,7 +29,7 @@ import { modules, getModuleUrl } from "../testdata/visualModules";
 test.describe("Module Visual Automation", () => {
   modules.forEach((module) => {
     test(`should validate ${module.name}`, async ({ page }) => {
-      await page.setViewportSize({ width: 1440, height: 906 });
+      await page.setViewportSize({ width: 1440, height: 884 });
       const moduleUrl = getModuleUrl(module);
       console.log(moduleUrl);
       await page.goto(moduleUrl);

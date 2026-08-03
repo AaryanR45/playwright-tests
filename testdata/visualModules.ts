@@ -65,6 +65,16 @@ export const modules: VisualModule[] = [
     pageKey: "home",
     fullPage: true,
   },
+   {
+    name: "AI full page",
+    pageKey: "aipolicyDevOutside",
+    fullPage: true,
+  },
+  {
+    name: "AI policy Header",
+    selector:".u-pt-2xl.u-pb-l.u-bg-light-beige",
+    pageKey: "homeDevOutside",
+  },
 ];
 
 // Helper function to get URL from a module

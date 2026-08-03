@@ -28,4 +28,12 @@ export const pages: Record<string, Page> = {
     name: "Contact Us",
     url: "https://dev-appian-team-a.pantheonsite.io/contact-us/",
   },
+   homeDevOutside: {
+    name: "AI policy Header",
+    url: "https://outsidedev1.wpengine.com/ai-policy/",
+  },
+   aipolicyDevOutside: {
+    name: "AI policy",
+    url: "https://outsidedev1.wpengine.com/ai-policy/",
+  },
 };
